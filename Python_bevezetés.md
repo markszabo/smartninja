@@ -34,7 +34,7 @@ P-Sz: 16:00-24:00
 <details> 
   <summary>Az én megoldásom (kattints ide) </summary>
    
-   ```
+   ```python
 # -*- coding: utf-8 -*-
 
 print "================"
@@ -71,7 +71,7 @@ Végösszeg:   500.-
 <details> 
   <summary>Az én megoldásom (kattints ide) </summary>
    
-   ```
+   ```python
 # -*- coding: utf-8 -*-
 
 print "================"
@@ -119,7 +119,7 @@ Végösszeg:  2500.-
 <details> 
   <summary>Az én megoldásom (kattints ide) </summary>
    
-   ```
+   ```python
 # -*- coding: utf-8 -*-
 
 sorok_szama = 5
@@ -164,7 +164,7 @@ Végösszeg:  4000.-
 <details> 
   <summary>Az én megoldásom (kattints ide) </summary>
    
-   ```
+   ```python
 # -*- coding: utf-8 -*-
 
 sorok_szama = int(raw_input("Hány sört kérnek? "))
@@ -183,6 +183,352 @@ print "Végösszeg:  " + str(500*sorok_szama) + ".-"
 
 ## 5. Barna sör
 
+Nagyon jól megy a kocsmának, és ezért úgy döntenek, hogy a sima (világos) sör mellé elkezdenek barna sört is kínálni 600 Ft-os áron. Bővítsd ki az előző kódot, hogy bekérje, hogy hány világos sört kérnek, majd hogy hány barna sört kérnek és végül kiírja a blokkot.
+
+Példa kimenet:
+
+```
+Hány világos sört kérnek? 3
+Hány barna sört kérnek? 4
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Világos 3 db 1500.-
+Barna   4 db 2400.-
+
+Végösszeg:  3900.-
+```
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   Először is kérj be még egy információt a csapostól, hogy hány darab barna sört kérnek. Ehhez használd ugyanazt a parancsot mint korábban (a `raw_input()`-osat), csak figyelj, hogy jót kérdezzen a program és hogy új változóba tárold le (ha ugyanabba tárolod le, akkor felülírod az első kérdés válaszát).
+   Utána adj hozzá egy új sort a blokkhoz, ahol ezt a változót használva kiírod a barna sörök számát és kiírod a végösszeget. (Figyelj, hogy a barna sör korsója 600 Ft!)
+   Ezután frissítsd a végösszeget is, hogy figyelembe vegye a barna sört is.
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+vilagos_sorok_szama = int(raw_input("Hány világos sört kérnek? "))
+
+barna_sorok_szama = int(raw_input("Hány barna sört kérnek? "))
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+print ""
+print "Végösszeg:  " + str(500*vilagos_sorok_szama + 600*barna_sorok_szama) + ".-"
+   ```
+</details>
+
+## 6 Egyoldalú rendelések
+
+Igenám, de mi van ha egy társaság csak egy féle sört kér? Jelenleg olyankor is ráírjuk a másik sört a blokkra 0 Ft-tal. Írd át a programot, hogy ha 0 sört kérnek valamelyik fajtából, akkor ne írjuk ki azt a fajtát a blokkra.
+
+Példa kimenet:
+
+```
+Hány világos sört kérnek? 0
+Hány barna sört kérnek? 3
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Barna   3 db 1800.-
+
+Végösszeg:  1800.-
+```
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   Ahhoz, hogy valamit csak bizonyos feltételek esetén csináljunk az `If` szerkezetet használhatjuk, például:
+   ```python
+eletkor = 15
+if eletkor < 18:
+   print "Kiskorúakat nem szolgálunk ki"
+   ```
+   Vagyis az `if` utasítás után jön egy igaz vagy hamis feltétel, például, hogy egy változó kisebb-e egy számnál. Ezt követi egy `:`, majd a következő sor(ok)-at beljebb kezdjük valamennyi szóközzel (általában 4-gyel). Amíg a sorok beljebb kezdődnek, addig tart az `if` hatásköre: ezeket az utasításokat fogja csak akkor végrehajtani, ha a feltétel teljesül.
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+vilagos_sorok_szama = int(raw_input("Hány világos sört kérnek? "))
+
+barna_sorok_szama = int(raw_input("Hány barna sört kérnek? "))
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+if vilagos_sorok_szama > 0:
+    print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+if barna_sorok_szama > 0:
+    print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+print ""
+print "Végösszeg:  " + str(500*vilagos_sorok_szama + 600*barna_sorok_szama) + ".-"
+   ```
+</details>
+
+## 7. Összevissza sorrend
+
+Mostmár nagyon jól megy a kocsma, viszont a csapos elégedetlen, mert össze-vissza rendelnek a vendégek: 1 világost, 2 barnát, még 1 világost, 1 barnát, 2 világost, és most neki kell fejben tartania ezeket. Egészítsd ki a programot, hogy lehetőséget adjon arra, hogy a csaposnak csak azt kelljen beírnia, amit éppen kérnek: `v`-t ha világost, `b`-t ha barnát. Ha úgy nyom entert, hogy nem írt be semmit, akkor nyomtassuk ki a blokkot.
+
+Példa kimenet:
+
+```
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): b
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): b
+Mit kérnek? (v - világos, b - barna): 
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Világos 3 db 1500.-
+Barna   2 db 1200.-
+
+Végösszeg:  2700.-
+```
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   Ez most jelentősen más, mint eddig. Van egy feladat (a `Mit kérnek` kiírása és a válasz feldolgozása), amit addig kell csinálni, amíg el nem fogynak a rendelések. Az ilyen "addig kell csinálni amíg egy feltétel teljesül" feladatokra használható a `while` ciklus. A `while` ciklusnak egy speciális formája a `while True:`, amikor a feltétel helyére azt írjuk, hogy `True`, ami mindig igaz. Ez sima esetben azt eredményezné, hogy a program örökké fut, próbáljuk csak ki:
+```python
+while True:
+    print "Futok"
+```
+   (A piros négyzet - stop gombbal tudjuk megállítani a programot ilyenkor.) Ez nem túl hasznos, ezért általában a `while True:` cikluson belül írunk egy feltétel, és ha az teljesül, akkor kilépünk a `break` használatával, például:
+```python
+while True:
+    print "Futok"
+    valasz = raw_input("Menjunk meg? ")
+    if valasz == "nem":
+        break
+```
+   Itt is ugyanezt kell használni. Minden körben feltesszük a kérdést a csaposnak: `Mit kérnek? (v - világos, b - barna): `, majd ha `v`-t válaszolnak, akkor a világos sörök számát növeljük eggyel (`vilagos_sorok_szama = vilagos_sorok_szama + 1`), ha `b`-t, akkor a barna sörökét. Hogyha a válasz üres, vagyis `valasz == ""`, akkor kilépünk (`break`).
+   
+   Várjunk csak! Ha így futtatjuk, akkor első alkalommal, amikor próbálja megnövelni a világos sörök számát (`vilagos_sorok_szama = vilagos_sorok_szama + 1`) ezt a hibát fogjuk kapni: `NameError: name 'vilagos_sorok_szama' is not defined`, mivel még nincs értéke a változónak, ezért nem is tudja megnövelni. Ennek kijavítására a `while True:` ciklus előtt adjunk értéket a változónak: `vilagos_sorok_szama = 0`. Ugyanezt tegyük meg a barna sörök számát tartalmazó változóval is.
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+vilagos_sorok_szama = 0
+barna_sorok_szama = 0
+
+while True:
+    kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+    if kovetkezo_sor == "v":
+        vilagos_sorok_szama = vilagos_sorok_szama + 1
+    if kovetkezo_sor == "b":
+        barna_sorok_szama = barna_sorok_szama + 1
+    if kovetkezo_sor == "":
+        break
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+if vilagos_sorok_szama > 0:
+    print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+if barna_sorok_szama > 0:
+    print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+print ""
+print "Végösszeg:  " + str(500*vilagos_sorok_szama + 600*barna_sorok_szama) + ".-"
+   ```
+   
+   Ezt a feladatot meg lehet oldani `if-elif-else` használatával is, ekkor a `while True:` ciklus a következőre módosul:
+   ```python
+while True:
+    kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+    if kovetkezo_sor == "v":
+        vilagos_sorok_szama = vilagos_sorok_szama + 1
+    elif kovetkezo_sor == "b":
+        barna_sorok_szama = barna_sorok_szama + 1
+    else:
+        break   
+   ```
+   Ebben az esetben ha bármi mást, mint `b`-t vagy `v`-t ír be a csapos, akkor nyomtatjuk is a számlát.
+</details>
+
+## 8. Borravaló egyösszegben
+
+A vendégek szeretnek borravalót adni, és mivel igyekszünk mindent szépen vezetni (és adózni utána), ezért szeretnénk, ha ez a blokkon is megjelenne. Miután a vendégek befejezték a rendelést, kérdezzük meg a csapost, hogy mennyi borravalót adtak (írjon 0-t, ha nem adtak), és adjuk hozzá azt is a számlához.
+
+Példa kimenet:
+
+```
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): b
+Mit kérnek? (v - világos, b - barna): 
+Mennyi borravalót adtak? (írj 0-t, ha nem adtak): 400
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Világos 2 db 1000.-
+Barna   1 db 600.-
+Borravaló    400.-
+
+Végösszeg:  2000.-
+```
+
+Figyelj arra, hogy ha nem adtak borravalót, akkor ne jelenjen meg az a sor a számlán!
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   Mikor akarjuk bekérni a borravaló összegét? A `while` vége után és a `print ========` előtt. Figyelj arra, hogy számmá konvertálva (`int()`) tudod hozzáadni a végösszeghez, viszont csak szövegként (`str()`) tudod kiírni.
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+vilagos_sorok_szama = 0
+barna_sorok_szama = 0
+
+while True:
+    kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+    if kovetkezo_sor == "v":
+        vilagos_sorok_szama = vilagos_sorok_szama + 1
+    elif kovetkezo_sor == "b":
+        barna_sorok_szama = barna_sorok_szama + 1
+    else:
+        break
+
+borravalo = int(raw_input("Mennyi borravalót adtak? (írj 0-t, ha nem adtak): "))
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+if vilagos_sorok_szama > 0:
+    print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+if barna_sorok_szama > 0:
+    print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+if borravalo > 0:
+    print "Borravaló    " + str(borravalo) + ".-"
+print ""
+print "Végösszeg:  " + str(500*vilagos_sorok_szama + 600*barna_sorok_szama + borravalo) + ".-"
+   ```
+</details>
+
+## 9. Borravaló alapján köszönés
+
+Vannak vendégek, akik adnak borravalót és vannak, akik nem. A csapos szeretné, ha a borravalót adó vendégeknek a blokkjára ráírnánk, hogy visszavárjuk őket. Egészítsd ki a blokkot a végösszeg után még egy sorral: `Visszavárunk!` amennyiben adott borravalót a vendég.
+
+Példa kimenet:
+
+```
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): 
+Mennyi borravalót adtak? (írj 0-t, ha nem adtak): 100
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Világos 1 db 500.-
+Borravaló    100.-
+
+Végösszeg:  600.-
+Visszavárunk!
+```
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   Hasonlóan az előző feladathoz, ahol a `Borravaló ` sor kiírása csak akkor történt, ha volt borravaló.
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+vilagos_sorok_szama = 0
+barna_sorok_szama = 0
+
+while True:
+    kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+    if kovetkezo_sor == "v":
+        vilagos_sorok_szama = vilagos_sorok_szama + 1
+    elif kovetkezo_sor == "b":
+        barna_sorok_szama = barna_sorok_szama + 1
+    else:
+        break
+
+borravalo = int(raw_input("Mennyi borravalót adtak? (írj 0-t, ha nem adtak): "))
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+if vilagos_sorok_szama > 0:
+    print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+if barna_sorok_szama > 0:
+    print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+if borravalo > 0:
+    print "Borravaló    " + str(borravalo) + ".-"
+print ""
+print "Végösszeg:  " + str(500*vilagos_sorok_szama + 600*barna_sorok_szama + borravalo) + ".-"
+if borravalo > 0:
+    print "Visszavárunk!"
+   ```
+</details>
+
+## 10. Borravaló százalékosan
+
+
+
+Példa kimenet:
 
 <details> 
   <summary>Segítség (kattints ide) </summary>
@@ -194,26 +540,92 @@ print "Végösszeg:  " + str(500*sorok_szama) + ".-"
 <details> 
   <summary>Az én megoldásom (kattints ide) </summary>
    
-   ```
+   ```python
 
    ```
 </details>
 
-## 6. Összevissza sorrend
-
-## 7. Búzasör
-
-## 8. Borravaló egyösszegben
-
-## 9. Borravaló százalékosan
-
-## 10. Borravaló kerekítve
-
 ## 11. Asztalok kezelése
+
+
+
+Példa kimenet:
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+
+   ```
+</details>
 
 ## 12. Törzsvendég program
 
+
+
+Példa kimenet:
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+
+   ```
+</details>
+
 ## 13. Törzsvendég program fájlba írással
 
+
+
+Példa kimenet:
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+
+   ```
+</details>
+
 ## 14. Percenkénti akciók
+
+
+
+Példa kimenet:
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+
+   ```
+</details>
 
