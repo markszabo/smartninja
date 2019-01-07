@@ -88,10 +88,31 @@ print "Végösszeg:   500.-"
 
 ## 3. Öt sör
 
+Elterjed a kocsma híre és ötösével jönnek az emberek, mindig 5 sört kérve. Módosítsd a programot, hogy 5 sörről nyomtassa a blokkot. Az 5-öt tárold változóban.
+
+Példa kimenet:
+```
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Sör    5 db 2500.-
+
+Végösszeg:  2500.-
+```
+
 <details> 
   <summary>Segítség (kattints ide) </summary>
    
+   Folytasd az előző feladat során megkezdett programot. Először is a `print`-ek elé írj egy sort, amiben létrehozod a változót, ami a sörök számát tárolja, például: `sorok_szama = 5` (azért csak példa, mert lehet más is a változó neve).
    
+   Utána a blokk `print`-elésekor tudod ezt a változót használni. Először módosítsd a `print "Sör     1 db 500.-"` sort a sör mennyiségével: `print "Sör     " + str(sorok_szama) + " db 500.-"`. Az `str()` függvényre azért van szükség, mert különben hibát dob: szöveget (string-et) és számot (int-et) nem tud összeadni.
+   
+   Ezután frissítsd az árakat is hasonlóan. Egy sör ára továbbra is `500.-`, úgyhogy az új árat úgy kapjuk, hogy `500*sorok_szama`. Ezt ismét szöveggé kell alakítani az `str()` függvénnyel, hogy ki tudjuk írni.
+   
+   Végül a végösszeg sort is frissítsük hasonlóan.
    
 </details>
 
@@ -99,17 +120,44 @@ print "Végösszeg:   500.-"
   <summary>Az én megoldásom (kattints ide) </summary>
    
    ```
+# -*- coding: utf-8 -*-
 
+sorok_szama = 5
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+print "Sör    " + str(sorok_szama) + " db " + str(500*sorok_szama) + ".-"
+print ""
+print "Végösszeg:  " + str(500*sorok_szama) + ".-"
    ```
 </details>
 
 ## 4. Akármennyi sör
 
+Igenám, de vannak vendégek, akik nem 5 sört kérnek. Bővítsd a programot, hogy először megkérdezze a csapost, hogy hány sört kérnek, majd annak alapján készítse el a blokkot.
+
+Példa kimenet:
+```
+Hány sört kérnek? 8
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Sör    8 db 4000.-
+
+Végösszeg:  4000.-
+```
 
 <details> 
   <summary>Segítség (kattints ide) </summary>
    
-   
+   A felhasználótól (csapostól) bemenetet kérni a `raw_input("Kérdés?")` függvénnyel lehet, ami visszaadja a beadott értéket. Ha ezt változóban akarjuk tárolni, azt így tehetjük meg: `valasz = raw_input("Kérdés?")`. Ugyanakkor a `raw_input()` szöveggel, string-gel tér vissza. Ahhoz, hogy ezt számként tudjuk használni az `int()` függvénnyel számmá kell konvertálni. Összerakva így fog kinézni a parancs: `valasz = int(raw_input("Kérdés?"))`
    
 </details>
 
@@ -117,7 +165,19 @@ print "Végösszeg:   500.-"
   <summary>Az én megoldásom (kattints ide) </summary>
    
    ```
+# -*- coding: utf-8 -*-
 
+sorok_szama = int(raw_input("Hány sört kérnek? "))
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+print "Sör    " + str(sorok_szama) + " db " + str(500*sorok_szama) + ".-"
+print ""
+print "Végösszeg:  " + str(500*sorok_szama) + ".-"
    ```
 </details>
 
