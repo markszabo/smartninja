@@ -44,3 +44,31 @@ print "V-Cs: 16:00-22:00"
 print "P-Sz: 16:00-24:00"
    ```
 </details>
+
+2. Egy sör
+
+3. Öt sör
+
+4. Akármennyi sör
+
+5. Barna sör
+
+6. Összevissza sorrend
+
+7. Búzasör
+
+8. Borravaló egyösszegben
+
+9. Borravaló százalékosan
+
+10. Borravaló kerekítve
+
+11. Asztalok kezelése
+
+12. Törzsvendég program
+
+13. Törzsvendég program fájlba írással
+
+14. Percenkénti akciók
+
+8. 
