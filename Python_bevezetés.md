@@ -524,11 +524,384 @@ if borravalo > 0:
    ```
 </details>
 
-## 10. Borravaló százalékosan
+## 10. Borravaló felkerekítve
 
-
+A vendégek általában úgy adnak borravalót, hogy felkerekítik az összeget: `2000-ből kérek vissza`. Módosítsuk a programunkat ehhez a körülményhez: ahelyett, hogy a borravaló összegét kérnénk be, írjuk ki a végösszeget, és kérjük be, hogy mennyiből kérnek vissza. Ha a csapos nem ír be semmit, akkor vegyük úgy, hogy nem adtak borravalót.
 
 Példa kimenet:
+
+```
+Mit kérnek? (v - világos, b - barna): b
+Mit kérnek? (v - világos, b - barna): 
+A végösszeg: 600.-
+Mennyiből kérnek vissza? 750
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Barna   1 db 600.-
+Borravaló    150.-
+
+Végösszeg:  750.-
+Visszavárunk!
+```
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   Figyelj a konvertálásra (`str()` és `int()`).
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+vilagos_sorok_szama = 0
+barna_sorok_szama = 0
+
+while True:
+    kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+    if kovetkezo_sor == "v":
+        vilagos_sorok_szama = vilagos_sorok_szama + 1
+    elif kovetkezo_sor == "b":
+        barna_sorok_szama = barna_sorok_szama + 1
+    else:
+        break
+
+vegosszeg = 500*vilagos_sorok_szama + 600*barna_sorok_szama
+
+print "A végösszeg: " + str(vegosszeg) + ".-"
+teljes_osszeg = raw_input("Mennyiből kérnek vissza? ")
+if teljes_osszeg == "":
+    teljes_osszeg = vegosszeg
+
+borravalo = int(teljes_osszeg) - vegosszeg
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+if vilagos_sorok_szama > 0:
+    print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+if barna_sorok_szama > 0:
+    print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+if borravalo > 0:
+    print "Borravaló    " + str(borravalo) + ".-"
+print ""
+print "Végösszeg:  " + str(teljes_osszeg) + ".-"
+if borravalo > 0:
+    print "Visszavárunk!"
+   ```
+</details>
+
+## 11. Csalók kiszűrése
+
+Igenám, de az eddigi programunk lehetőséget adott arra, hogy kevesebből kérjünk vissza, mint amennyi a végösszeg volt, például ha 1700 volt a vége, és mi 1500-ból kértünk vissza, akkor csak annyit kellett fizetnünk. Javítsuk ki ezt, és ha valaki kevesebből kér vissza, akkor is a helyes végösszeget kérjük el tőle.
+
+Példa kimenet:
+
+```
+Mit kérnek? (v - világos, b - barna): b
+Mit kérnek? (v - világos, b - barna): 
+A végösszeg: 600.-
+Mennyiből kérnek vissza? 500
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Barna   1 db 600.-
+
+Végösszeg:  600.-
+```
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   Ellenőrizd, hogy a teljes összeg (amiből visszakérnek) kisebb-e, mint a végösszeg (az italok ára), és ha igen, akkor legyen a teljes összeg egyenlő a végösszeggel. Figyelj a konvertálásra (`int()` és `str()`)! 
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+vilagos_sorok_szama = 0
+barna_sorok_szama = 0
+
+while True:
+    kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+    if kovetkezo_sor == "v":
+        vilagos_sorok_szama = vilagos_sorok_szama + 1
+    elif kovetkezo_sor == "b":
+        barna_sorok_szama = barna_sorok_szama + 1
+    else:
+        break
+
+vegosszeg = 500*vilagos_sorok_szama + 600*barna_sorok_szama
+
+print "A végösszeg: " + str(vegosszeg) + ".-"
+teljes_osszeg = raw_input("Mennyiből kérnek vissza? ")
+if teljes_osszeg == "" or int(teljes_osszeg) < vegosszeg:
+    teljes_osszeg = vegosszeg
+
+borravalo = int(teljes_osszeg) - vegosszeg
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+if vilagos_sorok_szama > 0:
+    print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+if barna_sorok_szama > 0:
+    print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+if borravalo > 0:
+    print "Borravaló    " + str(borravalo) + ".-"
+print ""
+print "Végösszeg:  " + str(teljes_osszeg) + ".-"
+if borravalo > 0:
+    print "Visszavárunk!"
+   ```
+</details>
+
+## 12. Minden 5. sör ingyen akció
+
+Nagyon jól megy a kocsmának, ezért akciót hírdetnek: minden 5. sör az azonos fajtából ingyen van. Ezt a blokkon külön szeretnék feltűntetni, mint `Akció   -600.-`. Módosítsd a programot, hogy amennyiben valamelyik sörből több, mint 5-öt isznak, akkor az 5. ára levonásra kerüljön az akció részeként. Ha világos és barna sörből is több, mint 5-öt isznak, akkor vonja le mindkettőt a program.
+
+Példa kimenet:
+
+```
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): b
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): v
+Mit kérnek? (v - világos, b - barna): 
+A végösszeg: 3100.-
+Mennyiből kérnek vissza? 3300
+================
+Kincstár Kocsma
+Budapest, Váci u. 47.
+V-Cs: 16:00-22:00
+P-Sz: 16:00-24:00
+
+Világos 6 db 3000.-
+Barna   1 db 600.-
+Akció       -500.-
+Borravaló    200.-
+
+Végösszeg:  3300.-
+Visszavárunk!
+```
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   A `Mit kérnek` után és a `A végösszeg` előtt kell kiszámolni az akciót és levonni a végösszegből.
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+vilagos_sorok_szama = 0
+barna_sorok_szama = 0
+
+while True:
+    kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+    if kovetkezo_sor == "v":
+        vilagos_sorok_szama = vilagos_sorok_szama + 1
+    elif kovetkezo_sor == "b":
+        barna_sorok_szama = barna_sorok_szama + 1
+    else:
+        break
+
+akcio = 0
+if vilagos_sorok_szama >= 5:
+    akcio = akcio + 500
+if barna_sorok_szama >= 5:
+    akcio = akcio + 600
+
+vegosszeg = 500*vilagos_sorok_szama + 600*barna_sorok_szama - akcio
+
+print "A végösszeg: " + str(vegosszeg) + ".-"
+teljes_osszeg = raw_input("Mennyiből kérnek vissza? ")
+if teljes_osszeg == "" or int(teljes_osszeg) < vegosszeg:
+    teljes_osszeg = vegosszeg
+
+borravalo = int(teljes_osszeg) - vegosszeg
+
+print "================"
+print "Kincstár Kocsma"
+print "Budapest, Váci u. 47."
+print "V-Cs: 16:00-22:00"
+print "P-Sz: 16:00-24:00"
+print ""
+if vilagos_sorok_szama > 0:
+    print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+if barna_sorok_szama > 0:
+    print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+if akcio > 0:
+    print "Akció       " + str(-akcio) + ".-"
+if borravalo > 0:
+    print "Borravaló    " + str(borravalo) + ".-"
+print ""
+print "Végösszeg:  " + str(teljes_osszeg) + ".-"
+if borravalo > 0:
+    print "Visszavárunk!"
+   ```
+</details>
+
+Módosítsd a kódot, hogy ne csak az 5. sör legyen ingyen, hanem minden 5. (vagyis ha valaki 12-t vesz, akkor kapjon kettőt ingyen, ha 28-at, akkor 5-öt stb.).
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   A kérdés voltaképp az, hogy a sörök számában hányszor van meg az 5, vagyis `sorok_szama / 5`. Viszont ez lehet tört szám lesz (pl 7 esetén 1.4), úgyhogy kerekítsük le. Ehhez használhatjuk az `int()` függvényt, ami egyszerűen levágja a tizedes pont utáni részt, vagy a `floor()` függvényt a `math` könyvtárból:
+   ```python
+from math import floor
+
+print floor(7/5)
+   ```
+   
+</details>
+
+## 13. Kód darabolása
+
+Egyre hosszabb a kód, ideje kicsit rendbe szedni. Szervezd ki a különböző funkcionalitás a következő függvényekbe:
+
+```
+def rendeles_felvetel():
+   # visszatér a rendelt világos és barna sörök számával egy listában
+   return [vilagos_sorok_szama, barna_sorok_szama]
+   
+def vegosszeg_kiszamitasa(vilagos_sorok_szama, barna_sorok_szama, van_akcio):
+   # a van_akcio változó True vagy False és ettől függ, hogy van-e épp a minden 5. ingyenes akció
+   # visszatér a végösszeggel borravaló nélkül
+   return vegosszeg
+
+def borravalo_kerese(vegosszeg):
+   # megkérdezi, hogy mennyiből kértek vissza és visszatér a borravaló összegével
+   return borravalo
+
+def blokk_nyomtatasa(vilagos_sorok_szama, barna_sorok_szama, vegosszeg, borravalo):
+   # kinyomtatja a blokkot és nem tér vissza semmivel
+```
+Utána a program maga már csak ezeknek a függvényeknek az egymás utáni meghívása lesz:
+```
+[vilagos_sorok_szama, barna_sorok_szama] = rendeles_felvetel()
+
+vegosszeg = vegosszeg_kiszamitasa(vilagos_sorok_szama, barna_sorok_szama, True)
+
+borravalo = borravalo_kerese(vegosszeg)
+
+blokk_nyomtatasa(vilagos_sorok_szama, barna_sorok_szama, vegosszeg, borravalo)
+```
+
+<details> 
+  <summary>Segítség (kattints ide) </summary>
+   
+   Ez egy bonyolultabb feladat, elég, ha elakadtál, nézd meg nyugodtan az én megoldásom és próbáld meg megérteni.
+   
+</details>
+
+<details> 
+  <summary>Az én megoldásom (kattints ide) </summary>
+   
+   ```python
+# -*- coding: utf-8 -*-
+
+def rendeles_felvetel():
+    vilagos_sorok_szama = 0
+    barna_sorok_szama = 0
+
+    while True:
+        kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+        if kovetkezo_sor == "v":
+            vilagos_sorok_szama = vilagos_sorok_szama + 1
+        elif kovetkezo_sor == "b":
+            barna_sorok_szama = barna_sorok_szama + 1
+        else:
+            break
+    return [vilagos_sorok_szama, barna_sorok_szama]
+
+def vegosszeg_kiszamitasa(vilagos_sorok_szama, barna_sorok_szama, van_akcio):
+    akcio = 0
+    if van_akcio:
+        if vilagos_sorok_szama >= 5:
+            akcio = akcio + 500
+        if barna_sorok_szama >= 5:
+            akcio = akcio + 600
+
+    return 500*vilagos_sorok_szama + 600*barna_sorok_szama - akcio
+
+def borravalo_kerese(vegosszeg):
+    print "A végösszeg: " + str(vegosszeg) + ".-"
+    teljes_osszeg = raw_input("Mennyiből kérnek vissza? ")
+    if teljes_osszeg == "" or int(teljes_osszeg) < vegosszeg:
+        teljes_osszeg = vegosszeg
+
+    borravalo = int(teljes_osszeg) - vegosszeg
+    return borravalo
+
+def blokk_nyomtatasa(vilagos_sorok_szama, barna_sorok_szama, vegosszeg, borravalo):
+    akcio = vegosszeg_kiszamitasa(vilagos_sorok_szama, barna_sorok_szama, False) - vegosszeg
+    print "================"
+    print "Kincstár Kocsma"
+    print "Budapest, Váci u. 47."
+    print "V-Cs: 16:00-22:00"
+    print "P-Sz: 16:00-24:00"
+    print ""
+    if vilagos_sorok_szama > 0:
+        print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+    if barna_sorok_szama > 0:
+        print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+    if akcio > 0:
+        print "Akció       " + str(-akcio) + ".-"
+    if borravalo > 0:
+        print "Borravaló    " + str(borravalo) + ".-"
+    print ""
+    print "Végösszeg:  " + str(vegosszeg) + ".-"
+    if borravalo > 0:
+        print "Visszavárunk!"
+
+
+[vilagos_sorok_szama, barna_sorok_szama] = rendeles_felvetel()
+
+vegosszeg = vegosszeg_kiszamitasa(vilagos_sorok_szama, barna_sorok_szama, True)
+
+borravalo = borravalo_kerese(vegosszeg)
+
+blokk_nyomtatasa(vilagos_sorok_szama, barna_sorok_szama, vegosszeg, borravalo)
+
+   ```
+</details>
+
+## 14. Asztalok kezelése
+
+Bővült a kocsma, és most már nem a pultnál kérnek és fizetnek a vendégek, hanem felszolgáló megy ki a 4 asztalhoz és csak távozáskor fizetnek. Ennek alapján bővítsd ki a programot arra, hogy kezelje a 4 asztalhoz a fogyasztást, valamint kérésre tudjon blokkot nyomtatni nekik (és ekkor törölje az ahhoz az asztalhoz tárolt fogyasztást).
+
+Példa kimenet:
+```
+
+```
 
 <details> 
   <summary>Segítség (kattints ide) </summary>
@@ -544,88 +917,3 @@ Példa kimenet:
 
    ```
 </details>
-
-## 11. Asztalok kezelése
-
-
-
-Példa kimenet:
-
-<details> 
-  <summary>Segítség (kattints ide) </summary>
-   
-   
-   
-</details>
-
-<details> 
-  <summary>Az én megoldásom (kattints ide) </summary>
-   
-   ```python
-
-   ```
-</details>
-
-## 12. Törzsvendég program
-
-
-
-Példa kimenet:
-
-<details> 
-  <summary>Segítség (kattints ide) </summary>
-   
-   
-   
-</details>
-
-<details> 
-  <summary>Az én megoldásom (kattints ide) </summary>
-   
-   ```python
-
-   ```
-</details>
-
-## 13. Törzsvendég program fájlba írással
-
-
-
-Példa kimenet:
-
-<details> 
-  <summary>Segítség (kattints ide) </summary>
-   
-   
-   
-</details>
-
-<details> 
-  <summary>Az én megoldásom (kattints ide) </summary>
-   
-   ```python
-
-   ```
-</details>
-
-## 14. Percenkénti akciók
-
-
-
-Példa kimenet:
-
-<details> 
-  <summary>Segítség (kattints ide) </summary>
-   
-   
-   
-</details>
-
-<details> 
-  <summary>Az én megoldásom (kattints ide) </summary>
-   
-   ```python
-
-   ```
-</details>
-
