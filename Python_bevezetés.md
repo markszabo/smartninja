@@ -974,9 +974,124 @@ Visszavárunk!
 ================
 Hanyas asztalt szeretnéd kezelni? 
 ```
+<details> 
+  <summary>Az én megoldásom 1 (kattints ide) - osztályok nélkül </summary>
+   
+   ```python
+   # -*- coding: utf-8 -*-
+
+def rendeles_felvetel():
+    vilagos_sorok_szama = 0
+    barna_sorok_szama = 0
+
+    while True:
+        kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+        if kovetkezo_sor == "v":
+            vilagos_sorok_szama = vilagos_sorok_szama + 1
+        elif kovetkezo_sor == "b":
+            barna_sorok_szama = barna_sorok_szama + 1
+        else:
+            break
+    return [vilagos_sorok_szama, barna_sorok_szama]
+
+def vegosszeg_kiszamitasa(vilagos_sorok_szama, barna_sorok_szama, van_akcio):
+    akcio = 0
+    if van_akcio:
+        if vilagos_sorok_szama >= 5:
+            akcio = akcio + 500
+        if barna_sorok_szama >= 5:
+            akcio = akcio + 600
+
+    return 500*vilagos_sorok_szama + 600*barna_sorok_szama - akcio
+
+def borravalo_kerese(vegosszeg):
+    print "A végösszeg: " + str(vegosszeg) + ".-"
+    teljes_osszeg = raw_input("Mennyiből kérnek vissza? ")
+    if teljes_osszeg == "" or int(teljes_osszeg) < vegosszeg:
+        teljes_osszeg = vegosszeg
+
+    borravalo = int(teljes_osszeg) - vegosszeg
+    return borravalo
+
+def blokk_nyomtatasa(vilagos_sorok_szama, barna_sorok_szama, vegosszeg, borravalo):
+    akcio = vegosszeg_kiszamitasa(vilagos_sorok_szama, barna_sorok_szama, False) - vegosszeg
+    print "================"
+    print "Kincstár Kocsma"
+    print "Budapest, Váci u. 47."
+    print "V-Cs: 16:00-22:00"
+    print "P-Sz: 16:00-24:00"
+    print ""
+    if vilagos_sorok_szama > 0:
+        print "Világos " + str(vilagos_sorok_szama) + " db " + str(500*vilagos_sorok_szama) + ".-"
+    if barna_sorok_szama > 0:
+        print "Barna   " + str(barna_sorok_szama) + " db " + str(600*barna_sorok_szama) + ".-"
+    if akcio > 0:
+        print "Akció       " + str(-akcio) + ".-"
+    if borravalo > 0:
+        print "Borravaló    " + str(borravalo) + ".-"
+    print ""
+    print "Végösszeg:  " + str(vegosszeg) + ".-"
+    if borravalo > 0:
+        print "Visszavárunk!"
+    print "================"
+
+
+class Asztal(object):
+    def __init__(self, asztal_szama):
+        self.asztal_szama = asztal_szama
+        self.vilagos_sorok_szama = 0
+        self.barna_sorok_szama = 0
+
+asztal1_vilagos = 0
+asztal1_barna = 0
+asztal2_vilagos = 0
+asztal2_barna = 0
+asztal3_vilagos = 0
+asztal3_barna = 0
+asztal4_vilagos = 0
+asztal4_barna = 0
+
+while True:
+    asztal_szama = int(raw_input("Hanyas asztalt szeretnéd kezelni? "))
+    if asztal_szama == 1:
+        valasztott_asztal_vilagos = asztal1_vilagos
+        valasztott_asztal_barna = asztal1_barna
+    elif asztal_szama == 2:
+        valasztott_asztal_vilagos = asztal2_vilagos
+        valasztott_asztal_barna = asztal2_barna
+    elif asztal_szama == 3:
+        valasztott_asztal_vilagos = asztal3_vilagos
+        valasztott_asztal_barna = asztal3_barna
+    elif asztal_szama == 4:
+        valasztott_asztal_vilagos = asztal4_vilagos
+        valasztott_asztal_barna = asztal4_barna
+    [vilagos_sorok_szama, barna_sorok_szama] = rendeles_felvetel()
+    valasztott_asztal_vilagos += vilagos_sorok_szama
+    valasztott_asztal_barna += barna_sorok_szama
+    fizetnenek = raw_input("Fizetnének? ")
+    if fizetnenek == "igen":
+        vegosszeg = vegosszeg_kiszamitasa(valasztott_asztal_vilagos, valasztott_asztal_barna, True)
+        borravalo = borravalo_kerese(vegosszeg)
+        blokk_nyomtatasa(valasztott_asztal_vilagos, valasztott_asztal_barna, vegosszeg, borravalo)
+        valasztott_asztal_vilagos = 0
+        valasztott_asztal_barna = 0
+    if asztal_szama == 1:
+         asztal1_vilagos = valasztott_asztal_vilagos
+         asztal1_barna = valasztott_asztal_barna
+    elif asztal_szama == 2:
+         asztal2_vilagos = valasztott_asztal_vilagos
+         asztal2_barna = valasztott_asztal_barna
+    elif asztal_szama == 3:
+         asztal3_vilagos = valasztott_asztal_vilagos
+         asztal3_barna = valasztott_asztal_barna
+    elif asztal_szama == 4:
+         asztal4_vilagos = valasztott_asztal_vilagos
+         asztal4_barna = valasztott_asztal_barna
+   ```
+</details>
 
 <details> 
-  <summary>Az én megoldásom (kattints ide) </summary>
+  <summary>Az én megoldásom 2 (kattints ide) - minimális osztály használattal </summary>
    
    ```python
    # -*- coding: utf-8 -*-
@@ -1058,6 +1173,89 @@ while True:
         blokk_nyomtatasa(valasztott_asztal.vilagos_sorok_szama, valasztott_asztal.barna_sorok_szama, vegosszeg, borravalo)
         asztalok[asztal_szama - 1].vilagos_sorok_szama = 0
         asztalok[asztal_szama - 1].barna_sorok_szama = 0
+   ```
+</details>
+
+<details> 
+  <summary>Az én megoldásom 3 (kattints ide) - nagy mennyiségű osztály használattal </summary>
+  Figyeld, hogy mennyivel rövidebb lett a kód.
+   
+   ```python
+   # -*- coding: utf-8 -*-
+
+
+class Asztal(object):
+    def __init__(self, asztal_szama):
+        self.asztal_szama = asztal_szama
+        self.vilagos_sorok_szama = 0
+        self.barna_sorok_szama = 0
+
+    def rendeles_felvetel(self):
+        while True:
+            kovetkezo_sor = raw_input("Mit kérnek? (v - világos, b - barna): ")
+            if kovetkezo_sor == "v":
+                self.vilagos_sorok_szama = self.vilagos_sorok_szama + 1
+            elif kovetkezo_sor == "b":
+                self.barna_sorok_szama = self.barna_sorok_szama + 1
+            else:
+                break
+        return
+
+    def vegosszeg_kiszamitasa(self, van_akcio):
+        akcio = 0
+        if van_akcio:
+            if self.vilagos_sorok_szama >= 5:
+                akcio = akcio + 500
+            if self.barna_sorok_szama >= 5:
+                akcio = akcio + 600
+
+        return 500*self.vilagos_sorok_szama + 600*self.barna_sorok_szama - akcio
+
+    def borravalo_kerese(this, vegosszeg):
+        print "A végösszeg: " + str(vegosszeg) + ".-"
+        teljes_osszeg = raw_input("Mennyiből kérnek vissza? ")
+        if teljes_osszeg == "" or int(teljes_osszeg) < vegosszeg:
+            teljes_osszeg = vegosszeg
+
+        borravalo = int(teljes_osszeg) - vegosszeg
+        return borravalo
+
+    def blokk_nyomtatasa(self, vegosszeg, borravalo):
+        akcio = self.vegosszeg_kiszamitasa(False) - vegosszeg
+        print "================"
+        print "Kincstár Kocsma"
+        print "Budapest, Váci u. 47."
+        print "V-Cs: 16:00-22:00"
+        print "P-Sz: 16:00-24:00"
+        print ""
+        if self.vilagos_sorok_szama > 0:
+            print "Világos " + str(self.vilagos_sorok_szama) + " db " + str(500*self.vilagos_sorok_szama) + ".-"
+        if self.barna_sorok_szama > 0:
+            print "Barna   " + str(self.barna_sorok_szama) + " db " + str(600*self.barna_sorok_szama) + ".-"
+        if akcio > 0:
+            print "Akció       " + str(-akcio) + ".-"
+        if borravalo > 0:
+            print "Borravaló    " + str(borravalo) + ".-"
+        print ""
+        print "Végösszeg:  " + str(vegosszeg) + ".-"
+        if borravalo > 0:
+            print "Visszavárunk!"
+        print "================"
+        self.barna_sorok_szama = 0
+        self.vilagos_sorok_szama = 0
+
+
+asztalok = [Asztal(1), Asztal(2), Asztal(3), Asztal(4)]
+
+while True:
+    asztal_szama = int(raw_input("Hanyas asztalt szeretnéd kezelni? "))
+    valasztott_asztal = asztalok[asztal_szama-1]
+    valasztott_asztal.rendeles_felvetel()
+    fizetnenek = raw_input("Fizetnének? ")
+    if fizetnenek == "igen":
+        vegosszeg = valasztott_asztal.vegosszeg_kiszamitasa(True)
+        borravalo = valasztott_asztal.borravalo_kerese(vegosszeg)
+        valasztott_asztal.blokk_nyomtatasa(vegosszeg, borravalo)
 
    ```
 </details>
