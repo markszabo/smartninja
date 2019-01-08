@@ -1,8 +1,8 @@
 # Python bevezetés #
 
-Ennek a feladatnak során a Python alapok átismétlésére lesz lehetőség. A feladat alap felállása: egy kocsma pénztárgép rendszerének megírására kértek fel titeket. A feladat részekre van bontva, minden rész tartalmazza az aktuális részfeladat előírásait, egy példa működést, segítséget (ha elakadtok), illetve a megoldást is. Ha sikerül megoldanotok akkor is érdemes lehet megnézni a megoldást, mert valószínűleg én máshogy oldottam meg és sokszor abból is lehet tanulni. Ettől természetesen minden megoldás, ami az elvárt működéshez vezet jó megoldás.
+Ennek a feladatnak során a Python alapok átismétlésére lesz lehetőség. A feladat alap felállása: egy kocsma pénztárgép rendszerének megírására kértek fel titeket. A feladat részekre van bontva, minden rész tartalmazza az aktuális részfeladat előírásait, egy példa működést, segítséget (ha elakadtok), illetve a megoldást is. Ha sikerül megoldanotok akkor is érdemes lehet megnézni a megoldást, mert valószínűleg én máshogy oldottam meg és sokszor abból is lehet tanulni. Ettől természetesen minden megoldás, ami az elvárt működéshez vezet, jó megoldás.
 
-A program amit írnotok kell fog futni a kocsmában a pénztárgépen. A program fogja bekérni, hogy a vendégek miből mennyit rendelnek, majd a végén kinyomtatni a blokkot. Kezdetben egyszerűbb lesz a program, majd fokozatosan kerül be több ital, a borravaló lehetősége, törzsvásárlói kedvezmény, asztalok kezelése stb.
+A program amit írnotok kell fog futni a kocsmában a pénztárgépen. A program fogja bekérni, hogy a vendégek miből mennyit rendelnek, majd a végén kinyomtatni a blokkot. Kezdetben egyszerűbb lesz a program, majd fokozatosan kerül be több ital, a borravaló lehetősége, törzsvásárlói akciók, asztalok kezelése stb.
 
 A program működése két részre bontható: első részben a pincértől/csapostól kér információt a fogyasztásról, majd a második részben, amikor a vendég fizetni szeretne, akkor kiírja a blokkot. A két rész elválasztására egy `================` kiírását használjátok (lásd az adott részfeladatok példafutásánál is).
 
@@ -236,7 +236,7 @@ print "Végösszeg:  " + str(500*vilagos_sorok_szama + 600*barna_sorok_szama) + 
 
 ## 6 Egyoldalú rendelések
 
-Igenám, de mi van ha egy társaság csak egy féle sört kér? Jelenleg olyankor is ráírjuk a másik sört a blokkra 0 Ft-tal. Írd át a programot, hogy ha 0 sört kérnek valamelyik fajtából, akkor ne írjuk ki azt a fajtát a blokkra.
+Igenám, de mi van ha egy társaság csak egyféle sört kér? Jelenleg olyankor is ráírjuk a másik sört a blokkra 0 Ft-tal. Írd át a programot, hogy ha 0 sört kérnek valamelyik fajtából, akkor ne írjuk ki azt a fajtát a blokkra.
 
 Példa kimenet:
 
@@ -381,7 +381,7 @@ while True:
     else:
         break   
    ```
-   Ebben az esetben ha bármi mást, mint `b`-t vagy `v`-t ír be a csapos, akkor nyomtatjuk is a számlát.
+   Ebben az esetben ha bármi mást, mint `b`-t vagy `v`-t ír be a csapos, akkor nyomtatjuk is a számlát. Ez is teljesíti az eredeti feltételt, mert az csak a `v`, `b` és üres enter esetére definiálta a viselkedést.
 </details>
 
 ## 8. Borravaló egyösszegben
@@ -678,7 +678,7 @@ if borravalo > 0:
 
 ## 12. Minden 5. sör ingyen akció
 
-Nagyon jól megy a kocsmának, ezért akciót hírdetnek: minden 5. sör az azonos fajtából ingyen van. Ezt a blokkon külön szeretnék feltűntetni, mint `Akció   -600.-`. Módosítsd a programot, hogy amennyiben valamelyik sörből több, mint 5-öt isznak, akkor az 5. ára levonásra kerüljön az akció részeként. Ha világos és barna sörből is több, mint 5-öt isznak, akkor vonja le mindkettőt a program.
+Nagyon jól megy a kocsmának, ezért akciót hirdetnek: minden 5. sör az azonos fajtából ingyen van. Ezt a blokkon külön szeretnék feltűntetni, mint pl. `Akció   -600.-`. Módosítsd a programot, hogy amennyiben valamelyik sörből több, mint 5-öt isznak, akkor az 5. ára levonásra kerüljön az akció részeként. Ha világos és barna sörből is több, mint 5-öt isznak, akkor vonja le mindkettőt a program. (Egyelőre elég csak az 5. sört kezelni, ha valaki pl. 12 sört kér, akkor is elég, ha egyet kapnak ingyen.)
 
 Példa kimenet:
 
@@ -774,7 +774,7 @@ Módosítsd a kódot, hogy ne csak az 5. sör legyen ingyen, hanem minden 5. (va
 <details> 
   <summary>Segítség (kattints ide) </summary>
    
-   A kérdés voltaképp az, hogy a sörök számában hányszor van meg az 5, vagyis `sorok_szama / 5`. Viszont ez lehet tört szám lesz (pl 7 esetén 1.4), úgyhogy kerekítsük le. Ehhez használhatjuk az `int()` függvényt, ami egyszerűen levágja a tizedes pont utáni részt, vagy a `floor()` függvényt a `math` könyvtárból:
+   A kérdés voltaképp az, hogy a sörök számában hányszor van meg az 5, vagyis `sorok_szama / 5`. Viszont ez lehet tört szám lesz (pl 7 esetén 1.4), úgyhogy kerekítsük le. Ehhez használhatjuk az `int()` függvényt, ami egyszerűen levágja a tizedes pont utáni részt, vagy a `floor()` függvényt a `math` könyvtárból így:
    ```python
 from math import floor
 
@@ -898,22 +898,4 @@ blokk_nyomtatasa(vilagos_sorok_szama, barna_sorok_szama, vegosszeg, borravalo)
 
 Bővült a kocsma, és most már nem a pultnál kérnek és fizetnek a vendégek, hanem felszolgáló megy ki a 4 asztalhoz és csak távozáskor fizetnek. Ennek alapján bővítsd ki a programot arra, hogy kezelje a 4 asztalhoz a fogyasztást, valamint kérésre tudjon blokkot nyomtatni nekik (és ekkor törölje az ahhoz az asztalhoz tárolt fogyasztást).
 
-Példa kimenet:
-```
-
-```
-
-<details> 
-  <summary>Segítség (kattints ide) </summary>
-   
-   
-   
-</details>
-
-<details> 
-  <summary>Az én megoldásom (kattints ide) </summary>
-   
-   ```python
-
-   ```
-</details>
+A megoldáshoz használhatsz osztályokat, vagy simán asztalonként 2 változót a barna és világos sörökre.
